@@ -71,41 +71,67 @@ function fetchRequest() {
       return response.json();
     })
     .then(function (data) {
-      //brewery name
-      //street address
-      //state
-      //country
-      //zip code
-      //phone number
-      //website
-      console.log(data.length);
+
       for (let i = 0; i < data.length; i++) {
+        //brewery latitude
         var lat = data[i].latitude;
+        //brewery longitude
         var long = data[i].longitude;
+        //brewery name
+        var name = data[i].name;
+        //brewery street address
+        var address = data[i].street;
+        //brewery state
+        var state = data[i].state;
+        //brewery country
+        var country = data[i].country;
+        //brewery zip code/postal code
+        var zipCode = data[i].postal_code;
+        //brewery phone number
+        var number = data[i].phone;
+        //brewery website url
+        var website = data[i].website_url;
+
+        if (lat == null || long == null){
+          continue;
+        }
+        
         console.log(lat, long);
+        console.log(name, address, state, country, zipCode, number, website);
 
-        var map = L.map("map").setView([lat, long], 15);
+        // var map = L.map("map").setView([lat, long], 15);
 
-        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution:
-            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        }).addTo(map);
+        // L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        //   maxZoom: 19,
+        //   attribution:
+        //     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        // }).addTo(map);
 
-        var marker = L.marker([lat, long]).addTo(map);
+        // var marker = L.marker([lat, long]).addTo(map);
 
         //create element dynamically within the loop for each container
       }
     });
 }
 
-/*var map = L.map('map').setView([long, lat], 15);
-  
- L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
- }).addTo(map);
-  
- var marker = L.marker([long, lat]).addTo(map);*/
+// Make a function that will be the html for the Modal window. Can call in fetch so we can use the data
+function createBreweryHTML(brewery){
+  return `
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <h3>${brewery.name}</h3>
+          <p class="card-text">${brewery.address}</p>
+        </div>
+            <p class="modal-content">
+              ${brewery.number}
+            </p>
+            <button class="modal-close modal-exit">X</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+};
 
 fetchRequest();
