@@ -1,4 +1,28 @@
 body {
-    background-image: url('../project1-page-one.png');
-    background-size: cover;
+  background-image: url("../images/project1-page-one.png");
+  background-size: cover;
+}
+
+.logo {
+  font-family: "Ultra", serif;
+}
+
+/* Background Image on app.html - CSS-only technique #2 https://css-tricks.com/perfect-full-page-background-image */
+.bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+}
+.bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
 }
