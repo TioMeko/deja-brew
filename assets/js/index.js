@@ -135,3 +135,56 @@ function createBreweryHTML(brewery){
 };
 
 fetchRequest();
+
+
+// 1. Create variables
+var pastContainer = document.querySelector('#past-container');
+var citiesSearchedArray = [];
+var cityName = document.querySelector('#city');
+
+// 2. Add to the event listener to store brewery search term:
+  if (cityName) {
+    var citiesSearchedTemp =
+    {
+      city: cityName,
+    };
+    citiesSearchedArray.push(citiesSearchedTemp);
+    storeInput();
+  }
+
+// 3. Add the following function to put object in storage and JSON.stringify to convert it as a string
+function storeInput() {
+    localStorage.setItem("citiesSearchedArray", JSON.stringify(citiesSearchedArray));
+}
+// 4. Add the following function to use JSON.parse() to convert text to JavaScript object
+function init(){
+    var citiesSearchedStored = JSON.parse(localStorage.getItem("citiesSearchedArray"));
+   
+    if (citiesSearchedStored !== null){
+        citiesSearchedArray = citiesSearchedStored;
+    };
+   
+    printPastSearches();
+}
+   
+init();
+
+// 5. Add function to create buttons to print past searches
+function printPastSearches() {
+   
+    for (var i = 0; i < citiesSearchedArray.length; i++) {
+        var citySearched= citiesSearchedArray[i];
+
+        var cityli = document.createElement("li");
+        cityli.textContent = citySearched;
+        pastContainer.appendChild(cityli);
+    };
+};
+
+//6. Add event listener to printPastSearches
+
+pastContainer.addEventListener("click", function(event) {
+    event.preventDefault();
+    //Confirm which button was clicked with event.target
+    printPastSearches();
+});
