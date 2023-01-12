@@ -41,7 +41,6 @@ var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorad
 var selectEl = document.querySelector('#states');
 
 for (var i = 0; i < states.length; i++) {
-    console.log(states[i])
     var option = document.createElement('option')
     option.textContent = states[i]
     selectEl.append(option);
@@ -54,39 +53,47 @@ searchBtn.addEventListener("click", fetchRequest)
 
 
 function fetchRequest() {
-  fetch("https://api.openbrewerydb.org/breweries?by_state=" + selectEl.value)
+  fetch("https://api.openbrewerydb.org/breweries?by_city=" + cityName.value)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].state != selectEl.value){
+            continue;
+          }else if (data[i].city.toUpperCase() == cityName.value.toUpperCase()){
+            //brewery latitude
+            var lat = data[i].latitude;
+            //brewery longitude
+            var long = data[i].longitude;
+            //brewery name
+            var name = data[i].name;
+            //brewery street address
+            var address = data[i].street;
+            //brewery state
+            var state = data[i].state;
+            //brewery country
+            var country = data[i].country;
+            //brewery zip code/postal code
+            var zipCode = data[i].postal_code;
+            //brewery phone number
+            var number = data[i].phone;
+            //brewery website url
+            var website = data[i].website_url;
 
-      for (let i = 0; i < data.length; i++) {
-        //brewery latitude
-        var lat = data[i].latitude;
-        //brewery longitude
-        var long = data[i].longitude;
-        //brewery name
-        var name = data[i].name;
-        //brewery street address
-        var address = data[i].street;
-        //brewery state
-        var state = data[i].state;
-        //brewery country
-        var country = data[i].country;
-        //brewery zip code/postal code
-        var zipCode = data[i].postal_code;
-        //brewery phone number
-        var number = data[i].phone;
-        //brewery website url
-        var website = data[i].website_url;
+            if (lat == null || long == null){
+              continue;
+            }
 
-        if (lat == null || long == null){
-          continue;
-        }
+            // TODO : all data needs to be stored into the local storage so we can access it
+            // on app.html and produce the data collected into the card.
+            console.log(lat, long);
+            console.log(name, address, state, country, zipCode, number, website);
+          }
         
-        console.log(lat, long);
-        console.log(name, address, state, country, zipCode, number, website);
-
+        
+      
+        // TODO: The mapping will be populated when the card is made.
         // var map = L.map("map").setView([lat, long], 15);
 
         // L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -102,7 +109,7 @@ function fetchRequest() {
     });
 }
 
-// Make a function that will be the html for the Modal window. Can call in fetch so we can use the data
+// TODO: Make a function that will be the html for the Modal window. Can call in fetch so we can use the data
 function createBreweryHTML(brewery){
   return `
     <div class="col-3">
