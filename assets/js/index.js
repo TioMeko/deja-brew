@@ -49,6 +49,7 @@ for (var i = 0; i < states.length; i++) {
 var searchBtn = document.querySelector('#submit');
 var cityName = document.querySelector('#city');
 
+
 searchBtn.addEventListener("click", fetchRequest)
 
 
@@ -58,40 +59,72 @@ function fetchRequest() {
       return response.json();
     })
     .then(function (data) {
+      
+      var isValid = false;
         for (let i = 0; i < data.length; i++) {
+  
           if (data[i].state != selectEl.value){
             continue;
+          
           }else if (data[i].city.toUpperCase() == cityName.value.toUpperCase()){
+            isValid = true;
             //brewery latitude
             var lat = data[i].latitude;
             //brewery longitude
             var long = data[i].longitude;
             //brewery name
-            var name = data[i].name;
+            var breweryName = data[i].name;
             //brewery street address
             var address = data[i].street;
+            //brewery city name
+            var cityN = data[i].city;
             //brewery state
             var state = data[i].state;
-            //brewery country
-            var country = data[i].country;
             //brewery zip code/postal code
             var zipCode = data[i].postal_code;
             //brewery phone number
             var number = data[i].phone;
             //brewery website url
             var website = data[i].website_url;
+            
 
             if (lat == null || long == null){
               continue;
             }
 
-            // TODO : all data needs to be stored into the local storage so we can access it
-            // on app.html and produce the data collected into the card.
+            if (number == null) {
+              number = "No number";
+            }
+
+            if (website == null){
+              website = "No website";
+            }
+
+            if (address == null) {
+              address = "No address";
+            }
+
             console.log(lat, long);
-            console.log(name, address, state, country, zipCode, number, website);
+            console.log(breweryName, address, cityN, state, zipCode, number, website);
+            
           }
-        
-        
+          // saves to local storage
+          var information = {
+            name: breweryName,
+            street: address,
+            city: cityN,
+            state: state,
+            zipCode: zipCode,
+            phone: number,
+            website: website
+          }
+
+          localStorage.setItem('brewery' + i, JSON.stringify(information));
+          JSON.parse(localStorage.getItem('brewery' + i));
+
+          // moves to the second page
+          window.location.href = "./assets/html/app.html";
+
       
         // TODO: The mapping will be populated when the card is made.
         // var map = L.map("map").setView([lat, long], 15);
@@ -105,7 +138,10 @@ function fetchRequest() {
         // var marker = L.marker([lat, long]).addTo(map);
 
         //create element dynamically within the loop for each container
-      }
+        }
+        if (!isValid) {
+          console.log( "this bitch empty yeet");
+        }
     });
 }
 
@@ -129,6 +165,8 @@ function createBreweryHTML(brewery){
   `;
 };
 
+
+//TODO: Create modal notification for isValid=false "No breweries found"
 
 
 
