@@ -87,22 +87,36 @@ function fetchRequest() {
             //brewery website url
             var website = data[i].website_url;
             
-
-            if (lat == null || long == null){
-              continue;
+            switch (true) {
+              case lat === null || long === null:
+                continue;
+              case number === null:
+                number = "No number";
+                break;
+              case website === null:
+                website = "No website";
+                break;
+              case address === null:
+                address = "No address";
+                break;
             }
 
-            if (number == null) {
-              number = "No number";
-            }
 
-            if (website == null){
-              website = "No website";
-            }
+            // if (lat == null || long == null){
+            //   continue;
+            // }
 
-            if (address == null) {
-              address = "No address";
-            }
+            // if (number == null) {
+            //   number = "No number";
+            // }
+
+            // if (website == null){
+            //   website = "No website";
+            // }
+
+            // if (address == null) {
+            //   address = "No address";
+            // }
 
             console.log(lat, long);
             console.log(breweryName, address, cityN, state, zipCode, number, website);
@@ -123,7 +137,7 @@ function fetchRequest() {
           JSON.parse(localStorage.getItem('brewery' + i));
 
           // moves to the second page
-          window.location.href = "./assets/html/app.html";
+          // window.location.href = "./assets/html/app.html";
 
       
         // TODO: The mapping will be populated when the card is made.
