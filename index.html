@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ultra&display=swap"
+      rel="stylesheet"
+    />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.1/flowbite.min.css"  rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Déjà Brew</title>
@@ -20,38 +26,40 @@
             class="justify-center mx-auto text-center align-bottom transition-all transform bg-stone-700 rounded-lg sm:align-middle sm:max-w-2xl sm:w-full"
           >
             <div
-              class="grid flex-wrap items-center justify-center grid-cols-1 mx-auto shadow-xl lg:grid-cols-1 rounded-xl"
+              class="grid pr-14 pl-14 pt-4 pb-3 flex-wrap items-center justify-center grid-cols-1 mx-auto shadow-xl lg:grid-cols-1 rounded-xl"
             >
               <div class="w-full mx-auto px-12 py-12">
                 <div>
                   <div>
                     <div class="items-center w-full">
-                      <h1 class="text-3xl text-center font-bold text-stone-50 l eading-6 lg:text-5xl">Déjà Brew</h1>
-                    </div>
-                    <div class="mt-4 text-base text-center text-stone-50">
-                      <h2>Enter a city name</h2>
+                      <h1 class="logo text-3xl text-center font-semibold text-zinc-100 l eading-6 lg:text-5xl">Déjà Brew</h1>
                     </div>
                   </div>
                 </div>
-                <label for="states" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your state</label>
-                <select id="states" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></select>
                 <div class="mt-6 space-y-2">
                   <div>
+                    <div class="mt-4 text-base text-center text-2xl text-stone-50 pt-4 pb-3 h-14">
+                      <h2>Enter a city name</h2>
+                    </div>
+
                     <label for="city" class="sr-only">City</label>
                     <input
                       type="text"
                       name="city"
                       id="city"
-                      class="text-center block w-full px-10 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                      class="text-center block w-full py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
                       placeholder="Enter a city name"
                     />
                   </div>
                   
-                  <div class="flex flex-col mt-4 lg:space-y-2">
+                  <label for="states" class="block mb-2 text-2xl text-stone-50 pt-4 pb-2">Select your state</label>
+                  <select id="states" class="bg-gray-50 border border-gray-300 text-gray-900 h-14 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-stone dark:focus:border-stone-500"></select>
+
+                  <div class="flex flex-col mt-4 pt-8 pb-4 lg:space-y-2">
                     <button
                       type="submit"
                       id="submit"
-                      class="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-yellow-600 rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      class="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-yellow-600 rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-500"
                     >
                     Search
                     </button>
