@@ -1,8 +1,10 @@
+/* Background Image on index.html */
 body {
   background-image: url("../images/project1-page-one.png");
   background-size: cover;
 }
 
+/* <h1> */
 .logo {
   font-family: "Ultra", serif;
 }
@@ -27,13 +29,15 @@ body {
   min-height: 50%;
 }
 
-.overlay {    
-  position: absolute;    
-  top: 0;    
-  left: 0;    
-  width: 100%;    
-  height: 100%;    
-  background-color: rgba(0, 0, 0, 0.6);    
-  backdrop-filter: blur(3px);    
-  z-index: 5;   
+/* Modal Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
 }
