@@ -54,7 +54,7 @@ searchBtn.addEventListener("click", fetchRequest)
 
 
 function fetchRequest() {
-  fetch("https://api.openbrewerydb.org/breweries?by_city=" + cityName.value)
+  fetch("https://api.openbrewerydb.org/breweries?by_city=" + cityName.value + "&by_state=" + selectEl.value)
     .then(function (response) {
       return response.json();
     })
@@ -63,10 +63,10 @@ function fetchRequest() {
       var isValid = false;
         for (let i = 0; i < data.length; i++) {
   
-          if (data[i].state != selectEl.value){
-            continue;
-          
-          }else if (data[i].city.toUpperCase() == cityName.value.toUpperCase()){
+          // if (data[i].state != selectEl.value){
+          //   continue;
+          //}
+          if (data[i].city.toUpperCase() == cityName.value.toUpperCase()){
             isValid = true;
             //brewery latitude
             var lat = data[i].latitude;
@@ -87,6 +87,7 @@ function fetchRequest() {
             //brewery website url
             var website = data[i].website_url;
             
+            //If there is missing information, give value instead of null
             switch (true) {
               case lat === null || long === null:
                 continue;
@@ -137,7 +138,7 @@ function fetchRequest() {
           JSON.parse(localStorage.getItem('brewery' + i));
 
           // moves to the second page
-          // window.location.href = "./assets/html/app.html";
+          window.location.href = "./assets/html/app.html";
 
       
         // TODO: The mapping will be populated when the card is made.
