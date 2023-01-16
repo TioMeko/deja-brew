@@ -1,59 +1,7 @@
-/*
-CREATE VARIABLES
-ADD COMMENTS ABOVE EACH ADDED SECTION TO EXPLAIN STEPS
- 
- 
-Step 1 (JS page #1): Get users search term and push to new page
-Add event listener to form, save search term, and push to new page
->>>conditional statement - does not match city then modal that notifies invalid entry
->>>>push to next page
-save input to local storage
- 
-Remove?? Step 2 (JS page #2): Capture term and put into the URL
-Get parameters from javascript file #1
-form.value
- 
-Step 3: Fetch
-Fetch data from Brewery DB API
- 
-Step 4: Print Results
->>>>Display title, schedule, address, and website
-
- 
-Step 5: Save and display favorites (Katie & Carson)
->>>>Pull from local storage
->>>>Make past searches clickable
- 
-*/
-
-// Creates states in select dropdown input
-var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
-var selectEl = document.querySelector('#states');
-var searchBtn = document.querySelector('#submit');
-var cityName = document.querySelector('#city');
-var cityNameTwo = document.querySelector('#city');
 var breweryStoredArray = [];
-var breweryFavoritesArray = [];
-
-for (var i = 0; i < states.length; i++) {
-    var option = document.createElement('option')
-    option.textContent = states[i]
-    selectEl.append(option);
-}
-
-/*
-if(!cityName) {
-  //Trigger modal
-}
-*/
-
-//window.location.href = "./assets/html/app.html";
-
-searchBtn.addEventListener("click", fetchRequest);
-
 
 function fetchRequest() {
-    fetch('https://api.openbrewerydb.org/breweries?by_city=' + cityName.value + "&by_state=" + selectEl.value)
+    fetch(queryString)
       .then(function (response) {
         return response.json();
       })
