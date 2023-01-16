@@ -29,4 +29,4 @@ document.addEventListener("keydown", function (k) {
   }
 });
 
-// overlay.addEventListener("click", closeModal); // This is currently not functioning correctly
+//overlay.addEventListener("click", closeModal); // This is currently not functioning correctly
