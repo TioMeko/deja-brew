@@ -54,7 +54,7 @@ searchBtn.addEventListener("click", fetchRequest)
 
 
 function fetchRequest() {
-  fetch("https://api.openbrewerydb.org/breweries?by_city=" + cityName.value)
+  fetch("https://api.openbrewerydb.org/breweries?by_city=" + cityName.value + "&by_state=" + selectEl.value)
     .then(function (response) {
       return response.json();
     })
@@ -63,10 +63,10 @@ function fetchRequest() {
       var isValid = false;
         for (let i = 0; i < data.length; i++) {
   
-          if (data[i].state != selectEl.value){
-            continue;
-          
-          }else if (data[i].city.toUpperCase() == cityName.value.toUpperCase()){
+          // if (data[i].state != selectEl.value){
+          //   continue;
+          //}
+          if (data[i].city.toUpperCase() == cityName.value.toUpperCase()){
             isValid = true;
             //brewery latitude
             var lat = data[i].latitude;
@@ -87,22 +87,37 @@ function fetchRequest() {
             //brewery website url
             var website = data[i].website_url;
             
-
-            if (lat == null || long == null){
-              continue;
+            //If there is missing information, give value instead of null
+            switch (true) {
+              case lat === null || long === null:
+                continue;
+              case number === null:
+                number = "No number";
+                break;
+              case website === null:
+                website = "No website";
+                break;
+              case address === null:
+                address = "No address";
+                break;
             }
 
-            if (number == null) {
-              number = "No number";
-            }
 
-            if (website == null){
-              website = "No website";
-            }
+            // if (lat == null || long == null){
+            //   continue;
+            // }
 
-            if (address == null) {
-              address = "No address";
-            }
+            // if (number == null) {
+            //   number = "No number";
+            // }
+
+            // if (website == null){
+            //   website = "No website";
+            // }
+
+            // if (address == null) {
+            //   address = "No address";
+            // }
 
             console.log(lat, long);
             console.log(breweryName, address, cityN, state, zipCode, number, website);
