@@ -126,7 +126,9 @@ function fetchRequest(cityName2, selectEl2) {
               state: state,
               zipCode: zipCode,
               phone: number,
-              website: website
+              website: website,
+              lat: lat,
+              long: long
             }
             
             //Add object to array
@@ -169,12 +171,7 @@ function fetchRequest(cityName2, selectEl2) {
     return `
       <!-- Card -->
       <div class="p-6 rounded-lg bg-white bg-opacity-75">
-        <img
-          alt="Brewery map."
-          class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl"
-          id="map"
-          src="../images/map-placeholder.jpg"
-        />
+      <div class="map"></div>
         <h2
           class="mb-8 text-xl font-semibold tracking-widest text-stone-700 uppercase breweryName"
         >
@@ -213,9 +210,33 @@ function fetchRequest(cityName2, selectEl2) {
       var div = document.createElement('div');
       div.innerHTML = brewCard(breweryStoredArray[i]);
       cardContainer.append(div);
+    
       //breweryName.value = breweryStoredArray[i].name;
     };
-  }
+      var map = L.map("map").setView([breweryStoredArray[i].lat, breweryStoredArray[i].long], 15);
+  
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+
+      var marker = L.marker([breweryStoredArray[i].lat, breweryStoredArray[i].long]).addTo(map);
+    };
+  
+
+  // function createMap() {
+  //     var map = L.map("map").setView([breweryStoredArray[i].lat, breweryStoredArray[i].long], 15);
+  
+  //     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  //       maxZoom: 19,
+  //       attribution:
+  //         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  //     }).addTo(map);
+
+  //     var marker = L.marker([breweryStoredArray[i].lat, breweryStoredArray[i].long]).addTo(map);
+  //   };
+  //   createMap();
   
   
   //TODO: Save Favorites
