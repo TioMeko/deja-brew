@@ -32,6 +32,7 @@ var selectEl = document.querySelector('#states');
 var searchBtn = document.querySelector('#submit');
 var cityName = document.querySelector('#city');
 var cityNameTwo = document.querySelector('#city');
+var errorModal = document.querySelector('#error-modal');
 var breweryStoredArray = [];
 var breweryFavoritesArray = [];
 
@@ -136,11 +137,13 @@ function fetchRequest() {
             breweryStoredArray.push(information);
   
           }
-          /*
+          
           if (!isValid) {
-            console.log( "this bitch empty yeet");
+            console.log("this bitch empty yeet");
+            errorModal.classList.add("visible");
+            errorModal.classList.remove("hidden");
           };
-          */
+          
           console.log(breweryStoredArray);
           storeBreweries();
         })
