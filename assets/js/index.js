@@ -31,8 +31,11 @@ var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorad
 var selectEl = document.querySelector('#states');
 var searchBtn = document.querySelector('#submit');
 var cityName = document.querySelector('#city');
-var cityNameTwo = document.querySelector('#city');
+var cityNameTwo = document.querySelector('#input-text2');
+var cardContainer = document.querySelector('#card-container');
+var breweryName = document.querySelector('.breweryName');
 var errorModal = document.querySelector('#error-modal');
+
 var breweryStoredArray = [];
 var breweryFavoritesArray = [];
 
@@ -48,13 +51,24 @@ if(!cityName) {
 }
 */
 
-//window.location.href = "./assets/html/app.html";
+function newPage(event) {
+  event.preventDefault;
+  var queryString = './assets/html/app.html?q=&' + cityName.value + "&" + selectEl.value;
+  location.assign(queryString);
+}
 
-searchBtn.addEventListener("click", fetchRequest);
+searchBtn.addEventListener("click", newPage);
 
+function getParam() {
+  var searchParamsArr = document.location.search.split('&');
+  var cityName2 = searchParamsArr[1].split('&').pop();
+  var selectEl2 = searchParamsArr[2].split('&').pop();
 
-function fetchRequest() {
-    fetch('https://api.openbrewerydb.org/breweries?by_city=' + cityName.value + "&by_state=" + selectEl.value)
+  fetchRequest(cityName2, selectEl2);
+}
+
+function fetchRequest(cityName2, selectEl2) {
+    fetch('https://api.openbrewerydb.org/breweries?by_city=' + cityName2 + "&by_state=" + selectEl2)
       .then(function (response) {
         return response.json();
       })
@@ -66,7 +80,7 @@ function fetchRequest() {
             // if (data[i].state != selectEl.value){
             //   continue;
             //}
-            if (data[i].city.toUpperCase() == cityName.value.toUpperCase()){
+            if (data[i].city.toUpperCase() == cityName2.toUpperCase()){
               isValid = true;
               //brewery latitude
               var lat = data[i].latitude;
@@ -89,41 +103,22 @@ function fetchRequest() {
               
               //If there is missing information, give value instead of null
               switch (true) {
-                case lat === null || long === null:
+                case lat == null || long == null:
                   continue;
-                case number === null:
+                case number == null:
                   number = "No number";
-                  break;
-                case website === null:
+                case address == null:
+                  address = "No address";
+                case website == null:
                   website = "No website";
                   break;
-                case address === null:
-                  address = "No address";
-                  break;
               }
-  
-  
-              // if (lat == null || long == null){
-              //   continue;
-              // }
-  
-              // if (number == null) {
-              //   number = "No number";
-              // }
-  
-              // if (website == null){
-              //   website = "No website";
-              // }
-  
-              // if (address == null) {
-              //   address = "No address";
-              // }
-  
+    
               console.log(lat, long);
               console.log(breweryName, address, cityN, state, zipCode, number, website);
               
             }
-            // saves to local storage
+            // saves to object
             var information = {
               name: breweryName,
               street: address,
@@ -133,7 +128,8 @@ function fetchRequest() {
               phone: number,
               website: website
             }
-  
+            
+            //Add object to array
             breweryStoredArray.push(information);
   
           }
@@ -145,7 +141,10 @@ function fetchRequest() {
           };
           
           console.log(breweryStoredArray);
+
+          //put array into local storage
           storeBreweries();
+
         })
   };
           // TODO: The mapping will be populated when the card is made.
@@ -162,20 +161,12 @@ function fetchRequest() {
           //create element dynamically within the loop for each container
   function storeBreweries() {
         localStorage.setItem('allBreweries', JSON.stringify(breweryStoredArray));
-        JSON.parse(localStorage.getItem('allBreweries'));
         createBreweryHTML();
   }
   
-  var cardContainer = document.querySelector('#card-container');
-  var breweryName = document.querySelector('.breweryName');
-  
   // TODO: Make a function that will be the html for the Modal window. Can call in fetch so we can use the data
-  var brewCard = `
-    <!-- Cards Container -->
-    <div
-      id="card-container"
-      class="grid w-full grid-cols-1 gap-6 mx-auto lg:grid-cols-3"
-    >
+  function brewCard (brew) {
+    return `
       <!-- Card -->
       <div class="p-6 rounded-lg bg-white bg-opacity-75">
         <img
@@ -187,8 +178,17 @@ function fetchRequest() {
         <h2
           class="mb-8 text-xl font-semibold tracking-widest text-stone-700 uppercase breweryName"
         >
-          Brewery Name
+        ${brew.name}
         </h2>
+        <p class="mx-auto text-base leading-relaxed text-stone-700">
+        ${brew.street}, ${brew.city}, ${brew.state} ${brew.zipCode}
+        </p>
+        <p class="mx-auto text-base leading-relaxed text-stone-700">
+        <a class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-neutral-600" target="_blank" href="${brew.website}">Website »</a>
+        </p>
+        <p class="mx-auto text-base leading-relaxed text-stone-700">
+        ${brew.phone}
+        </p>
         <button
           class="self-center mx-2 my-2 px-3 py-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-yellow-600 rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
           type="submit"
@@ -202,75 +202,20 @@ function fetchRequest() {
         </button>
       </div>
       <!-- Card End -->
-    `;
+    `};
   
+  //Pull information from storage and print to page
   function createBreweryHTML() {
+    JSON.parse(localStorage.getItem('allBreweries'));
+    console.log(breweryStoredArray[0].name);
+
     for (var i = 0; i < breweryStoredArray.length; i++) {
-      cardContainer.append(brewCard);
-      breweryName.value = breweryStoredArray[i].name;
+      var div = document.createElement('div');
+      div.innerHTML = brewCard(breweryStoredArray[i]);
+      cardContainer.append(div);
+      //breweryName.value = breweryStoredArray[i].name;
     };
   }
   
   
-  //TODO: Create modal notification for isValid=false "No breweries found"
-  
-  
-  
-  
-  
-  
-  
-  // LOCAL STORAGE STUFF
-  
-  
-  // // 1. Create variables
-  // var pastContainer = document.querySelector('#past-container');
-  // var citiesSearchedArray = [];
-  
-  // // 2. Add to the event listener to store brewery search term:
-  //   if (cityName) {
-  //     var citiesSearchedTemp =
-  //     {
-  //       city: cityName,
-  //     };
-  //     citiesSearchedArray.push(citiesSearchedTemp);
-  //     storeInput();
-  //   }
-  
-  // // 3. Add the following function to put object in storage and JSON.stringify to convert it as a string
-  // function storeInput() {
-  //     localStorage.setItem("citiesSearchedArray", JSON.stringify(citiesSearchedArray));
-  // }
-  // // 4. Add the following function to use JSON.parse() to convert text to JavaScript object
-  // function init(){
-  //     var citiesSearchedStored = JSON.parse(localStorage.getItem("citiesSearchedArray"));
-     
-  //     if (citiesSearchedStored !== null){
-  //         citiesSearchedArray = citiesSearchedStored;
-  //     };
-     
-  //     printPastSearches();
-  // }
-     
-  // init();
-  
-  // // 5. Add function to create buttons to print past searches
-  // function printPastSearches() {
-     
-  //     for (var i = 0; i < citiesSearchedArray.length; i++) {
-  //         var citySearched= citiesSearchedArray[i];
-  
-  //         var cityli = document.createElement("li");
-  //         cityli.textContent = citySearched;
-  //         pastContainer.appendChild(cityli);
-  //     };
-  // };
-  
-  // //6. Add event listener to printPastSearches
-  
-  // pastContainer.addEventListener("click", function(event) {
-  //     event.preventDefault();
-  //     //Confirm which button was clicked with event.target
-  //     printPastSearches();
-  // });
-  
+  //TODO: Save Favorites
