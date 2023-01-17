@@ -34,6 +34,8 @@ var cityName = document.querySelector('#city');
 var cityNameTwo = document.querySelector('#input-text2');
 var cardContainer = document.querySelector('#card-container');
 var breweryName = document.querySelector('.breweryName');
+var errorModal = document.querySelector('#error-modal');
+
 var breweryStoredArray = [];
 var breweryFavoritesArray = [];
 
@@ -131,6 +133,12 @@ function fetchRequest(cityName2, selectEl2) {
             breweryStoredArray.push(information);
   
           }
+          
+          if (!isValid) {
+            console.log("this bitch empty yeet");
+            errorModal.classList.add("visible");
+            errorModal.classList.remove("hidden");
+          };
           
           console.log(breweryStoredArray);
 
