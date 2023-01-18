@@ -7,12 +7,17 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-    crossorigin=""></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,7 +38,7 @@
       class="mx-auto px-8 py-6 flex flex-col items-center lg:flex-row lg:justify-between bg-stone-700"
     >
       <a
-        class="self-center mx-2 my-2 text-3xl font-semibold text-zinc-100"
+        class="self-center mx-2 my-2 text-3xl text-yellow-600"
         href="../../index.html"
         ><h1 class="logo">Déjà Brew</h1></a
       >
@@ -57,7 +62,9 @@
           class="self-center m-1 bg-stone-50 border border-stone-300 text-stone-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-stone-500 dark:focus:border-stone-500"
         ></select>
         <button
-          id="submit2" data-modal-target="error-modal" data-modal-hide="error-modal"
+          id="submit2"
+          data-modal-target="error-modal"
+          data-modal-hide="error-modal"
           class="self-center w-full m-1 px-3 py-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-yellow-600 rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
           type="submit"
         >
@@ -89,15 +96,14 @@
           <div
             id="card-container"
             class="grid w-full grid-cols-1 gap-6 mx-auto lg:grid-cols-3"
-          > 
-          </div>
+          ></div>
         </div>
       </section>
     </main>
 
     <!-- Modal Overlay -->
     <div class="overlay hidden z-10"></div>
-    
+
     <!-- Modal -->
     <div
       id="modal"
@@ -145,7 +151,7 @@
                   class="flex items-center p-3 text-base text-white rounded-lg font-medium bg-yellow-600 transition duration-500 ease-in-out transform bg-yellow-600 rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                 >
                   <span class="flex-1 text-center ml-3 whitespace-nowrap"
-                    >City Placeholder</span
+                    >Favorite Brewery</span
                   >
                 </a>
               </li>
@@ -157,8 +163,8 @@
     </div>
     <!-- Modal End -->
 
-      <!-- Error Modal -->
-  <!-- <div id="error-modal" tabindex="-1"
+    <!-- Error Modal -->
+    <!-- <div id="error-modal" tabindex="-1"
   class="hidden fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
   <div class="relative w-full h-full max-w-md md:h-auto">
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -185,7 +191,7 @@
     </div>
   </div>
 </div> -->
-<!-- Error Modal Ends -->
+    <!-- Error Modal Ends -->
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="../js/index.js"></script>
