@@ -27,7 +27,7 @@ Step 5: Save and display favorites (Katie & Carson)
 */
 
 // Creates states in select dropdown input
-var states = ["Alabama", "Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming",];
+var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming",];
 var stateName = document.querySelector("#states");
 var submitBtn = document.querySelector("#submit");
 var cityName = document.querySelector("#city");
@@ -72,9 +72,9 @@ function getParam() {
 function fetchRequest(cityName2, stateName2) {
   fetch(
     "https://api.openbrewerydb.org/breweries?by_city=" +
-      cityName2 +
-      "&by_state=" +
-      stateName2
+    cityName2 +
+    "&by_state=" +
+    stateName2
   )
     .then(function (response) {
       return response.json();
@@ -147,9 +147,19 @@ function fetchRequest(cityName2, stateName2) {
       }
 
       if (!isValid) {
+        var closeButton = document.querySelector("#close-button");
         console.log("this bitch empty yeet");
-        // errorModal.classList.add("visible");
-        // errorModal.classList.remove("hidden");
+        errorModal.classList.add("visible");
+        errorModal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+        overlay.classList.add("visible");
+
+        closeButton.addEventListener("click", function () {
+          errorModal.classList.add("hidden");
+          errorModal.classList.remove("visible");
+          overlay.classList.add("hidden");
+          overlay.classList.remove("visible");
+        })
       }
 
       console.log(breweryStoredArray);
@@ -186,9 +196,8 @@ function brewCard(brew, i) {
   )}-${brew.phone.slice(6, 11)}
           </p>
         <p class="mx-auto text-base leading-relaxed text-stone-700">
-          <a class="inline-flex items-center font-semibold text-yellow-700 lg:mb-0 hover:text-yellow-700" target="_blank" href="${
-            brew.website
-          }">Website »</a>
+          <a class="inline-flex items-center font-semibold text-yellow-700 lg:mb-0 hover:text-yellow-700" target="_blank" href="${brew.website
+    }">Website »</a>
           </p>
         <button
           class="self-center mt-8 mx-2 my-2 px-3 py-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-yellow-600 rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"

@@ -102,7 +102,7 @@
     </main>
 
     <!-- Modal Overlay -->
-    <div class="overlay hidden z-10"></div>
+    <div class="overlay hidden"></div>
 
     <!-- Modal -->
     <div
@@ -164,11 +164,11 @@
     <!-- Modal End -->
 
     <!-- Error Modal -->
-    <!-- <div id="error-modal" tabindex="-1"
-  class="hidden fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+    <div id="error-modal" tabindex="-1"
+  class="hidden flex item-center justify-center h-screen z-5 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
   <div class="relative w-full h-full max-w-md md:h-auto">
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-      <button type="button"
+      <button type="button" id="close-button"
         class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
         data-modal-hide="error-modal">
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -190,7 +190,7 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
     <!-- Error Modal Ends -->
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
