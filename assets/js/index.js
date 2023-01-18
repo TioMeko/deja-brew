@@ -28,12 +28,10 @@ Step 5: Save and display favorites (Katie & Carson)
 
 // Creates states in select dropdown input
 var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
-var selectEl = document.querySelector('#states');
-var searchBtn = document.querySelector('#submit');
+var stateName = document.querySelector('#states');
+var submitBtn = document.querySelector('#submit');
 var cityName = document.querySelector('#city');
-var cityNameTwo = document.querySelector('#input-text2');
 var cardContainer = document.querySelector('#card-container');
-var breweryName = document.querySelector('.breweryName');
 var errorModal = document.querySelector('#error-modal');
 
 var breweryStoredArray = [];
@@ -42,7 +40,7 @@ var breweryFavoritesArray = [];
 for (var i = 0; i < states.length; i++) {
     var option = document.createElement('option')
     option.textContent = states[i]
-    selectEl.append(option);
+    stateName.append(option);
 }
 
 /*
@@ -53,22 +51,22 @@ if(!cityName) {
 
 function newPage(event) {
   event.preventDefault;
-  var queryString = './assets/html/app.html?q=&' + cityName.value + "&" + selectEl.value;
+  var queryString = './assets/html/app.html?q=&' + cityName.value.split(' ').join('_') + "&" + stateName.value;
   location.assign(queryString);
 }
 
-searchBtn.addEventListener("click", newPage);
+submitBtn.addEventListener("click", newPage);
 
 function getParam() {
   var searchParamsArr = document.location.search.split('&');
   var cityName2 = searchParamsArr[1].split('&').pop();
-  var selectEl2 = searchParamsArr[2].split('&').pop();
+  var stateName2 = searchParamsArr[2].split('&').pop();
 
-  fetchRequest(cityName2, selectEl2);
+  fetchRequest(cityName2, stateName2);
 }
 
-function fetchRequest(cityName2, selectEl2) {
-    fetch('https://api.openbrewerydb.org/breweries?by_city=' + cityName2 + "&by_state=" + selectEl2)
+function fetchRequest(cityName2, stateName2) {
+    fetch('https://api.openbrewerydb.org/breweries?by_city=' + cityName2 + "&by_state=" + stateName2)
       .then(function (response) {
         return response.json();
       })
@@ -76,11 +74,7 @@ function fetchRequest(cityName2, selectEl2) {
         
         var isValid = false;
           for (let i = 0; i < data.length; i++) {
-    
-            // if (data[i].state != selectEl.value){
-            //   continue;
-            //}
-            if (data[i].city.toUpperCase() == cityName2.toUpperCase()){
+            if (data[i].city.split(' ').join('_').toUpperCase() == cityName2.toUpperCase()){
               isValid = true;
               //brewery latitude
               var lat = data[i].latitude;
@@ -111,7 +105,6 @@ function fetchRequest(cityName2, selectEl2) {
                   address = "No address";
                 case website == null:
                   website = "No website";
-                  break;
               }
     
               console.log(lat, long);
@@ -126,7 +119,9 @@ function fetchRequest(cityName2, selectEl2) {
               state: state,
               zipCode: zipCode,
               phone: number,
-              website: website
+              website: website,
+              lat: lat,
+              long: long
             }
             
             //Add object to array
@@ -136,8 +131,8 @@ function fetchRequest(cityName2, selectEl2) {
           
           if (!isValid) {
             console.log("this bitch empty yeet");
-            errorModal.classList.add("visible");
-            errorModal.classList.remove("hidden");
+            // errorModal.classList.add("visible");
+            // errorModal.classList.remove("hidden");
           };
           
           console.log(breweryStoredArray);
@@ -147,34 +142,19 @@ function fetchRequest(cityName2, selectEl2) {
 
         })
   };
-          // TODO: The mapping will be populated when the card is made.
-          // var map = L.map("map").setView([lat, long], 15);
-  
-          // L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          //   maxZoom: 19,
-          //   attribution:
-          //     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-          // }).addTo(map);
-  
-          // var marker = L.marker([lat, long]).addTo(map);
   
           //create element dynamically within the loop for each container
   function storeBreweries() {
-        localStorage.setItem('allBreweries', JSON.stringify(breweryStoredArray));
-        createBreweryHTML();
+    localStorage.setItem('allBreweries', JSON.stringify(breweryStoredArray));
+    createBreweryHTML();
   }
   
   // TODO: Make a function that will be the html for the Modal window. Can call in fetch so we can use the data
-  function brewCard (brew) {
+  function brewCard (brew, i) {
     return `
       <!-- Card -->
       <div class="p-6 rounded-lg bg-white bg-opacity-75">
-        <img
-          alt="Brewery map."
-          class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl"
-          id="map"
-          src="../images/map-placeholder.jpg"
-        />
+      <div id="map${i}" style="height:180px"></div>
         <h2
           class="mb-8 text-xl font-semibold tracking-widest text-stone-700 uppercase breweryName"
         >
@@ -210,12 +190,20 @@ function fetchRequest(cityName2, selectEl2) {
     console.log(breweryStoredArray[0].name);
 
     for (var i = 0; i < breweryStoredArray.length; i++) {
+      // Create the HTML card content depending on array length
       var div = document.createElement('div');
-      div.innerHTML = brewCard(breweryStoredArray[i]);
+      div.innerHTML = brewCard(breweryStoredArray[i], i);
       cardContainer.append(div);
-      //breweryName.value = breweryStoredArray[i].name;
+
+      var map = L.map("map" + i).setView([breweryStoredArray[i].lat, breweryStoredArray[i].long], 15);
+      
+      // Dynamically create mapping through each iteration
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+
+      var marker = L.marker([breweryStoredArray[i].lat, breweryStoredArray[i].long]).addTo(map);
+     };
     };
-  }
-  
-  
-  //TODO: Save Favorites
