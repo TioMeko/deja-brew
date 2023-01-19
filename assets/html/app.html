@@ -10,14 +10,13 @@
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Ultra&display=swap" rel="stylesheet" />
   <!-- Stylesheet -->
   <link rel="stylesheet" href="../css/style.css" />
+
   <title>Déjà Brew</title>
 </head>
 
@@ -45,11 +44,12 @@
         Search
       </button>
     </div>
+    
     <!-- Modal (Favorites) Button -->
     <div id="favorites">
       <button id="favorites-button" type="button"
-        class="self-center w-full mx-2 my-2 px-3 py-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-yellow-600 rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-        type="submit">
+        class="self-center w-full mx-2 my-2 px-3 py-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-yellow-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-75"
+        type="submit" disabled>
         Favorites
       </button>
     </div>
@@ -131,14 +131,18 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Please enter a valid city in the United
-            States.</h3>
+          <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            Please enter a valid city in the United States.
+          </h3>
         </div>
       </div>
     </div>
   </div>
   <!-- Error Modal Ends -->
 
+  <!-- Connected scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
   <script src="../js/index.js"></script>
   <script src="../js/app.js"></script>
   <script src="../js/modal.js"></script>
