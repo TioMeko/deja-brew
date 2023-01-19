@@ -50,16 +50,20 @@ if(!cityName) {
 */
 
 function newPage(event) {
-  event.preventDefault;
+  if (event !== undefined){
+    event.preventDefault
+  }
+  //event.preventDefault;
   var queryString =
-    "./assets/html/app.html?q=&" +
-    cityName.value.split(" ").join("_") +
-    "&" +
-    stateName.value;
-  location.assign(queryString);
+    "./assets/html/app.html?q=&" + cityName.value.split(" ").join("_") + "&" + stateName.value;
+  location.href = queryString;
+  console.log(queryString);
+  console.log(event);
 }
-
-submitBtn.addEventListener("click", newPage);
+console.log(submitBtn)
+if (submitBtn !== null){
+  submitBtn.addEventListener("click", newPage);
+}
 
 function getParam() {
   var searchParamsArr = document.location.search.split("&");
@@ -71,11 +75,7 @@ function getParam() {
 
 function fetchRequest(cityName2, stateName2) {
   fetch(
-    "https://api.openbrewerydb.org/breweries?by_city=" +
-    cityName2 +
-    "&by_state=" +
-    stateName2
-  )
+    "https://api.openbrewerydb.org/breweries?by_city=" + cityName2 + "&by_state=" + stateName2)
     .then(function (response) {
       return response.json();
     })
