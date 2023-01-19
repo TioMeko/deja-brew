@@ -23,7 +23,7 @@ function newPage(event) {
     event.preventDefault
   };
   // If working locally, the variable queryString needs to be set to ./assets/html/app.html?q=& not /deja-brew/assets/html/app.html?q=&
-  var queryString = "./assets/html/app.html?q=&" + cityName.value.split(" ").join("_") + "&" + stateName.value;
+  var queryString = "/deja-brew/assets/html/app.html?q=&" + cityName.value.split(" ").join("_") + "&" + stateName.value;
   location.href = queryString;
 }
 
