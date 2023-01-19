@@ -28,5 +28,3 @@ document.addEventListener("keydown", function (k) {
     closeModal();
   }
 });
-
-//overlay.addEventListener("click", closeModal); // This is currently not functioning correctly
