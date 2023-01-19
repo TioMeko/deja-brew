@@ -6,7 +6,7 @@ We created an application that enables individuals to search for breweries in a 
 
 ## Website Showcase
 
-### Deployed Application: <ins>[Deja Brew](https://tiomeko.github.io/deja-brew/)</ins>
+### <ins>[Deja Brew](https://tiomeko.github.io/deja-brew/)</ins>
 
 <br>
 
