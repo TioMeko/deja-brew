@@ -28,3 +28,10 @@ We utilize [Leaflet](https://leafletjs.com/) to display a map for convenience an
   - [Flowbite](https://flowbite.com/)
   - [Google Fonts](https://fonts.google.com/)
   - [Wickedblocks](https://wickedblocks.dev/)
+  
+## Contributors
+
+  * Carson Adair : <img src="https://github.com/favicon.ico" width="15"> [ Carsonadair](https://github.com/carsonadair)
+  * Katherine Karr : <img src="https://github.com/favicon.ico" width="15"> [Kkarrwrites](https://github.com/kkarrwrites)
+  * Bethany Simmonds : <img src="https://github.com/favicon.ico" width="15"> [Bsimmonds28](https://github.com/bsimmonds28)
+  * Michael Arasimowicz : <img src="https://github.com/favicon.ico" width="15"> [TioMeko](https://github.com/TioMeko)
