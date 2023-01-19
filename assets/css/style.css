@@ -9,7 +9,7 @@ body {
   font-family: "Ultra", serif;
 }
 
-/* Background Image on app.html - CSS-only technique #2 https://css-tricks.com/perfect-full-page-background-image */
+/* Background Image on app.html */
 .bg {
   position: fixed;
   top: -50%;

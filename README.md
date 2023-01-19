@@ -2,7 +2,11 @@
 
 ## Description
 
-We created an application that enables individuals to search for breweries in a specific town or city. This application runs in the browser and features dynamically updated HTML and CSS powered by JavaScript code. It uses Tailwind and pulls information from two APIs. It has a clean and polished responsive user interface that adapts to multiple screen sizes.
+Are you a beer enthusiast looking for a new brewery to try? Are you tired of using the same old google format and seeing ads for things you don't need? Come try out [Deja Brew](https://tiomeko.github.io/deja-brew/)!
+
+Deja Brew is a handy application that allows users to search for breweries in local cities or anywhere in the United States. A user will select a state with the dropdown menu and type a city that is within the state selected. Once the search button is clicked, the following page will be populated with the breweries in the city.
+
+We utilize [Leaflet](https://leafletjs.com/) to display a map for convenience and if the local brewery does not have their longitude and latitude listed in the api, it will be excluded from the list of breweries. It also uses the CSS framework [Tailwind](https://tailwindcss.com/) and pulls information from [Open Brewery DB](https://www.openbrewerydb.org/).
 
 ## Website Showcase
 
