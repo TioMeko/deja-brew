@@ -1,4 +1,4 @@
-# Deja Brew
+# Déjà Brew
 
 ## Description
 
@@ -6,7 +6,7 @@ Are you a beer enthusiast looking for a new brewery to try? Are you tired of usi
 
 Deja Brew is a handy application that allows users to search for breweries in local cities or anywhere in the United States. A user will select a state with the dropdown menu and type a city that is within the state selected. Once the search button is clicked, the following page will be populated with the breweries in the city.
 
-We utilize [Leaflet](https://leafletjs.com/) to display a map for convenience and if the local brewery does not have their longitude and latitude listed in the api, it will be excluded from the list of breweries. It also uses the CSS framework [Tailwind](https://tailwindcss.com/) and pulls information from [Open Brewery DB](https://www.openbrewerydb.org/).
+We utilize [Leaflet](https://leafletjs.com/) to display a map for convenience and if the local brewery does not have their longitude and latitude listed in the API, it will be excluded from the list of breweries. It also uses the CSS framework [Tailwind](https://tailwindcss.com/) and pulls information from [Open Brewery DB](https://www.openbrewerydb.org/).
 
 ## Website Showcase
 
